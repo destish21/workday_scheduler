@@ -12,6 +12,7 @@ saveChngeButtons.on('click', function(){
   var time = currentInput.attr('id')
   var activity = currentInput.val()
   localStorage.setItem(time, JSON.stringify(activity))
+  localStorage.getItem('time',activity)
 
   console.log(currentInput.val())// this is the whole row, you'll need its child input
 
@@ -20,15 +21,15 @@ saveChngeButtons.on('click', function(){
 // header currentDay time format
 
 function HeaderTime() {
-    var today = moment().format(" dddd, ");
-    var date = moment().format(' ll,');
+    var today = moment().format(' dddd, ');
+    var date = moment().format(' ll, ');
 //     var { DateTime } = require('luxon');
 // DateTime.local();
 
 // increaset the time every second interval
 setInterval(function(){
     var time = moment();
-    currentDay.text(today + " "  +  date + " , " + time.format("hh:mm:ss:A"));
+    currentDay.text(today + ","  +  date + "," + time.format("hh:mm:ss:A"));
 }, 100);
 }
 
@@ -57,7 +58,7 @@ function rendercurrentDay() {
       var findString = "#" + day
       var needle = document.getElementById(day)
       console.log(day)
-      console.log(needle)
+      // console.log(needle)
       needle.value = ""
       $(findString).append(button)
       $(findString).attr("placeholder", "tada")

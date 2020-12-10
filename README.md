@@ -6,4 +6,4 @@ incase if you want dismiss or change your maind you can click clearevents and as
 
 ![workday_scheduler](ScreenShot05.png)
 
-URL:  https://destish21.github.io/workday_scheduler/
+URL: https://destish21.github.io/workday_scheduler/
