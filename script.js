@@ -1,29 +1,34 @@
 $(document).ready(function() {
-var display = $('.display-3');
+var displayH1 = $('.display-3');
 var l = $('.lead');
 var currentDay =  $('#currentDay');
 HeaderTime();
 console.log(currentDay)
 // localStorage();
+
 var saveChngeButtons = $(".saveBtn")
 saveChngeButtons.on('click', function(){
-  console.log(this)// this is the vanilla currentTarget
-  console.log($(this))// $(this) is the jQuery version
-  console.log($(this).parent())// this is the whole row, you'll need its child input
+  var currentInput = $(this).parent().find('input')
+  var time = currentInput.attr('id')
+  var activity = currentInput.val()
+  localStorage.setItem(time, JSON.stringify(activity))
+
+  console.log(currentInput.val())// this is the whole row, you'll need its child input
+
 })
 
 // header currentDay time format
 
 function HeaderTime() {
-    var today = moment().format("MMM Do YY");
-    var date = "" //moment().format('ll,');
+    var today = moment().format(" dddd, ");
+    var date = moment().format(' ll,');
 //     var { DateTime } = require('luxon');
 // DateTime.local();
 
 // increaset the time every second interval
 setInterval(function(){
     var time = moment();
-    currentDay.text(today + "," + date + "," + time.format("hh:mm:ss:A"));
+    currentDay.text(today + " "  +  date + " , " + time.format("hh:mm:ss:A"));
 }, 100);
 }
 
@@ -51,8 +56,8 @@ function rendercurrentDay() {
       button.textContent = "fas fa-save";
       var findString = "#" + day
       var needle = document.getElementById(day)
-      // console.log(day)
-      // console.log(needle)
+      console.log(day)
+      console.log(needle)
       needle.value = ""
       $(findString).append(button)
       $(findString).attr("placeholder", "tada")
@@ -60,19 +65,16 @@ function rendercurrentDay() {
       //todoList.appendChild(li);
     }
   }
+   $("#clearDay").on("click", function(e){
+        //clearing day event if confirming yes.
+        if (localStorage.length>0) {
+            var clear = confirm("Press OK if you want to clear today's events?");
+            if(clear){
+                localStorage.clear();
+            }
+        }
+    })
 
-  function display(event) {
-    event.preventDefault()
-    // get todisplay input value
-    var newdisplay = currentInput.Value
-    if(today !== '') {
-      // push value into todos
-    }else if (futureday){
-      localStorage.setItem('newdisplay', JSON.stringify(newdisplay))
-      rendercurrentDay() 
-
-    }
-  }
 
   rendercurrentDay()
  
