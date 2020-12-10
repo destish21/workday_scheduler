@@ -1,11 +1,8 @@
 $(document).ready(function() {
-var displayH1 = $('.display-3');
 var l = $('.lead');
 var currentDay =  $('#currentDay');
 HeaderTime();
 console.log(currentDay)
-// localStorage();
-
 var saveChngeButtons = $(".saveBtn")
 saveChngeButtons.on('click', function(){
   var currentInput = $(this).parent().find('input')
@@ -21,15 +18,12 @@ saveChngeButtons.on('click', function(){
 // header currentDay time format
 
 function HeaderTime() {
-    var today = moment().format(' dddd, ');
-    var date = moment().format(' ll, ');
-//     var { DateTime } = require('luxon');
-// DateTime.local();
-
+    var today = moment().format(' dddd ');
+    var date = moment().format(' ll ');
 // increaset the time every second interval
 setInterval(function(){
     var time = moment();
-    currentDay.text(today + ","  +  date + "," + time.format("hh:mm:ss:A"));
+    currentDay.text(today + ", "  +  date + ", " + time.format("hh:mm:ss:A"));
 }, 100);
 }
 
@@ -61,15 +55,13 @@ function rendercurrentDay() {
       // console.log(needle)
       needle.value = ""
       $(findString).append(button)
-      $(findString).attr("placeholder", "tada")
-      // appeend li todolist
-      //todoList.appendChild(li);
+      $(findString).attr("placeholder", "today")
     }
   }
-   $("#clearDay").on("click", function(e){
+   $("#clearDay").on("click", function(){
         //clearing day event if confirming yes.
         if (localStorage.length>0) {
-            var clear = confirm("Press OK if you want to clear today's events?");
+            var clear = confirm("Do you want to clearevents?");
             if(clear){
                 localStorage.clear();
             }
